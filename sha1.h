@@ -1,4 +1,6 @@
-
+/*
+╔
+*/
 #include <stdint.h>
 
 //The SHA1 Addition Function (auto pad to uint32 no need for mod 2^32 or and bitmask to 32bit
