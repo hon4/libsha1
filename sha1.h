@@ -15,3 +15,9 @@ uint32_t sha1_add(uint32_t x, uint32_t y) {
 uint32_t sha1_snx(uint8_t n, uint32_t x) {
 	return (x << n) | (x >> 32-n);
 }
+
+uint8_t* sha1(uint8_t str) {
+	uint64_t len = (uint64_t)sizeof(str);
+
+	return 0;
+}
