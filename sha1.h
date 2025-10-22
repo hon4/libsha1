@@ -2,7 +2,8 @@
 ╔═════════════╗
 ║ hon libSHA1 ║
 ╚═════════════╝
-
+│             │
+└─────────────┘
 */
 #include <stdint.h>
 #include <string.h>
