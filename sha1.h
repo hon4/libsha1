@@ -4,7 +4,7 @@
 ╚══════════════════╝
 │ Coded by: hon    │
 │ Version: 0.0.0   │
-│ Date: 2025-10-28 │
+│ Date: 2025-10-29 │
 └──────────────────┘
 */
 #include <stdint.h>
@@ -95,6 +95,20 @@ uint8_t* sha1(uint8_t* str) {
 	uint64_t bit_len = len * 8;
 	uint64_t block_count = calc_pad_size(len + 9); //+9 = +1 for 0x80 and +8 for uint64
 	uint32_t M[block_count][16];
+
+	for (int block = 0; block < block_count; block++) {
+		for (int i = 0; i < 16; i++) {
+			uint32_t value = 0;
+			for (int b = 0; b < 4; b++) {
+				int byte_idx = block * 64 + i * 4 + b;
+				uint8_t byte = (byte_idx < len) ? str[byte_idx] : 0;
+				value |= (uint32_t)byte << (8 * (3 - b));  // big-endian assembly
+			}
+			M[block][i] = value;
+		}
+	}
+
+	
 
 	printf("%llu\n",len);
 	return 0;
