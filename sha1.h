@@ -85,6 +85,7 @@ uint32_t sha1_const(uint8_t t) {
 
 //Calculation Helper Function
 uint64_t calc_pad_size(uint64_t l) {
+	//Need benchmarks on x86, on aarch64/arm64 method 2 with inline +9 +63 gives the highest speed
 	return ((l + 63) / 64);	//Method 2
 	//return (l / 64) + 1;	//Method 1
 }
