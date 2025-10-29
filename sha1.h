@@ -85,7 +85,8 @@ uint32_t sha1_const(uint8_t t) {
 
 //Calculation Helper Function
 uint64_t calc_pad_size(uint64_t l) {
-	return ((l + 63) / 64);
+	return ((l + 63) / 64);	//Method 2
+	//return (l / 64) + 1;	//Method 1
 }
 
 uint8_t* sha1(uint8_t* str) {
