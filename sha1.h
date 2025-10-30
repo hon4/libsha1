@@ -66,15 +66,6 @@ Notes: 1. In addition: if the Z variable is uint32_t can get values 0 <= z < 2^3
 | Addition            | Arithmetic | Z = (X + Y) mod 2^32             | = X + Y(when Z is a uint32_t) or Z = (X + Y) & 0xFFFFFFFF (when Z not uint32_t) |
 | Circular Left Shift | Bitwise    | S^n(X) = (X << n) OR (X >> 32-n) | = (X << n) | (X >> 32-n)                                                        |
 +---------------------+------------+----------------------------------+---------------------------------------------------------------------------------+
-
-hon libSHA1 Tests
-===================
-CPU Tests (probably will be changed to architecture tests)
-+-------------------+--------------+--------+-------+
-| CPU               | Architecture | Status | Notes |
-+-------------------+--------------+--------+-------+
-| AMD Ryzen 7 2700x | amd64        | Pass   |       |
-+-------------------+--------------+--------+-------+
 */
 
 //The SHA1 Addition Function (auto pad to uint32 no need for mod 2^32 or and bitmask to 32bit
