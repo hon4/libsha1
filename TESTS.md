@@ -18,6 +18,6 @@
 ### CPU Architectures (also known as)
 | Name    | a.k.a.                |
 |---------|-----------------------|
-| `amd64` | `x86_64`, `x86 64bit` |
-| `IA-32` | `x86`, `x86 32bit` |
-- `aarch64`: `arm64`
+| amd64   | `x86_64`, `x86 64bit` |
+| IA-32   | `x86`, `x86 32bit`    |
+| aarch64 | `arm64`               |   
