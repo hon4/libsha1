@@ -3,9 +3,16 @@
 ║ hon libSHA1      ║
 ╚══════════════════╝
 │ Coded by: hon    │
-│ Version: 0.0.0   │
+│ Version: 0.0.1   │
 │ Date: 2025-10-30 │
 └──────────────────┘
+*/
+/*
+ * This file (sha1.h) is part of hon's libSHA1
+ * Copyright (C) 2025 hon
+ *
+ * This program is free and open source software.
+ * License: GPL-2.0
 */
 #ifndef _SHA1_H
 #define _SHA1_H
