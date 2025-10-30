@@ -120,7 +120,7 @@ uint32_t endian_le2be(uint32_t i) {
 			((i << 24) & 0xFF000000);
 }
 
-uint8_t* sha1(uint8_t* str) {
+uint8_t* sha1(const uint8_t* str) {
 	uint64_t len = (uint64_t)strlen((char*)str);
 	uint64_t bit_len = len * 8;
 	uint64_t block_count = calc_pad_size(len + 9); //+9 = +1 for 0x80 and +8 for uint64
