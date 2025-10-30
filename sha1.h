@@ -128,13 +128,15 @@ uint8_t* sha1(uint8_t* str) {
 	memset(M, 0x00, block_count * 16 * sizeof(uint32_t));
 
 	/* Add the str into the M */
-	for (uint64_t i = 0; i < len; i++) {
-		((uint8_t*)M)[i] = str[i];
+	uint64_t __libsha1_tmp_i;
+	for (__libsha1_tmp_i = 0; __libsha1_tmp_i < len; __libsha1_tmp_i++) {
+		((uint8_t*)M)[__libsha1_tmp_i] = str[__libsha1_tmp_i];
 	}
 
 	((uint8_t*)M)[len] = 0x80; //Add the 0x80 = 0b10000000 at the end of the str
 
-	for (uint64_t iword = 0; iword < block_count * 16; iword++) {
+	uint64_t iword;
+	for (iword = 0; iword < block_count * 16; iword++) {
 		((uint32_t*)M)[iword] = endian_le2be(((uint32_t*)M)[iword]);
 	}
 
@@ -154,16 +156,19 @@ uint8_t* sha1(uint8_t* str) {
 
 	uint32_t W[80];
 	// Process all blocks
-	for (uint64_t xblock = 0; xblock < block_count; xblock++) {
+	uint64_t xblock;
+	for (xblock = 0; xblock < block_count; xblock++) {
 		memset(W, 0x00, 80 * sizeof(uint32_t)); //Clear the W
 		//Move the M[xblock] at the beggining of the W
-		for (int i = 0; i < 16; i++) {
-			W[i] = M[xblock][i];
+		int __libsha1_tmp_i2;
+		for (__libsha1_tmp_i2 = 0; __libsha1_tmp_i2 < 16; __libsha1_tmp_i2++) {
+			W[__libsha1_tmp_i2] = M[xblock][__libsha1_tmp_i2];
 		}
 
 		//Method 1 Step B
-		for (uint8_t t = 16; t <= 79; t++) { //t<=79 in x86 asm is checked with jle (1 instruction) but for other trashchip architectures like arm will need more than 1 instruction for check.
-			W[t] = sha1_snx(1, W[t-3] ^ W[t-8] ^ W[t-14] ^ W[t-16]);
+		uint8_t __libsha1_tmp_t1;
+		for (__libsha1_tmp_t1 = 16; __libsha1_tmp_t1 <= 79; __libsha1_tmp_t1++) { //t<=79 in x86 asm is checked with jle (1 instruction) but for other trashchip architectures like arm will need more than 1 instruction for check.
+			W[__libsha1_tmp_t1] = sha1_snx(1, W[__libsha1_tmp_t1-3] ^ W[__libsha1_tmp_t1-8] ^ W[__libsha1_tmp_t1-14] ^ W[__libsha1_tmp_t1-16]);
 		}
 
 		//Method 1 Step C
@@ -174,8 +179,9 @@ uint8_t* sha1(uint8_t* str) {
 		uint32_t E = H4;
 
 		//Method 1 Step D
-		for (uint8_t t = 0; t <= 79; t++) {
-			uint32_t TEMP = sha1_add(sha1_add(sha1_add(sha1_add(sha1_snx(5, A), sha1_funct(t, B, C, D)), E), W[t]), sha1_const(t));
+		uint8_t __libsha1_tmp_t2;
+		for (__libsha1_tmp_t2 = 0; __libsha1_tmp_t2 <= 79; __libsha1_tmp_t2++) {
+			uint32_t TEMP = sha1_add(sha1_add(sha1_add(sha1_add(sha1_snx(5, A), sha1_funct(__libsha1_tmp_t2, B, C, D)), E), W[__libsha1_tmp_t2]), sha1_const(__libsha1_tmp_t2));
 			E = D;
 			D = C;
 			C = sha1_snx(30, B);
