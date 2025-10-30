@@ -21,6 +21,13 @@
 extern "C" {
 #endif
 
+
+// Define Endianness (1=Little-Endian, 0=Big-Endian)
+#define __LIBSHA1_USE_ENDIANNESS__ 1 //You can modify this line if your compiler do not automatically detects endianness
+//Do NOT change the following
+#define __LIBSHA1_LITTLE_ENDIAN__ 1
+#define __LIBSHA1_BIG_ENDIAN__ 0
+
 #include <stdint.h>
 #include <string.h>
 
@@ -114,10 +121,12 @@ uint64_t calc_pad_size(uint64_t l) {
 }
 
 uint32_t endian_le2be(uint32_t i) {
+	#if defined(__LIBSHA1_USE_ENDIANNESS__) && (__LIBSHA1_USE_ENDIANNESS__ == __LIBSHA1_LITTLE_ENDIAN__)
 	return ((i >> 24) & 0x000000FF) |
 			((i >> 8) & 0x0000FF00) |
 			((i << 8) & 0x00FF0000) |
 			((i << 24) & 0xFF000000);
+	#endif
 }
 
 uint8_t* sha1(const uint8_t* str) {
