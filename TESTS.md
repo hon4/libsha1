@@ -11,7 +11,7 @@
 ### OS: Windows
 | Compiler | Version | Status | Full OS                  | CPU   | Notes |
 |----------|---------|--------|--------------------------|-------|-------|
-| Dev-C++  | 4.9.9.2 | Fail   | Windows XP Pro SP3 32bit | IA-32 | for loops used outside C99 |
+| Dev-C++  | 4.9.9.2 | Pass   | Windows XP Pro SP3 32bit | IA-32 |       |
 
 
 ## Notes
