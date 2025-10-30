@@ -5,10 +5,11 @@ An open source, indepedent and easy to use SHA1 for C/C++.
 Working - Partially Tested
 
 ## Installation
-1. Place `sha1.h` into `/usr/include`, then use it with:
+Place `sha1.h` into `/usr/include`, then use it with:
 ```c
 #include <sha1.h>
 ```
+You can use it without installing sha1.h if you are compiling on a machine without root permissions by placing sha1.h in your project directory and including it with #include "sha1.h" instead of #include <sha1.h>. However, installation is generally recommended.
 
 ## Example Usage
 ```c
