@@ -7,8 +7,8 @@
 │ Date: 2025-10-30 │
 └──────────────────┘
 */
-#ifndef SHA1_H
-#define SHA1_H
+#ifndef _SHA1_H
+#define _SHA1_H
 
 #ifdef __cplusplus
 extern "C" {
