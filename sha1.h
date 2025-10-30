@@ -10,6 +10,10 @@
 #ifndef SHA1_H
 #define SHA1_H
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #include <stdint.h>
 #include <string.h>
 
@@ -192,5 +196,9 @@ uint8_t* sha1(uint8_t* str) {
 
 	return ret;
 }
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif // SHA1_H
