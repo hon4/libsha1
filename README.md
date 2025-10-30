@@ -15,6 +15,7 @@ Place `sha1.h` into `/usr/include`, then use it with:
 unsigned char* text_str = "this text will be hashed";
 unsigned char* sha1_hash = sha1(text_str);
 ```
+For a complete example, see [example.c](example.c).
 Be sure that the `sha1.h` file is installed and that you include it with `#include <sha1.h>`.
 
 ## Test Information
