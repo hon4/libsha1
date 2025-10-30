@@ -77,7 +77,7 @@ uint32_t sha1_add(uint32_t X, uint32_t Y) {
 
 //The SHA1 Circular BitShift S^n(X)
 uint32_t sha1_snx(uint8_t n, uint32_t X) {
-	return (X << n) | (X >> 32-n);
+	return (X << n) | (X >> (32-n)); //Ensure the - is executed before the BitShift
 }
 
 //The SHA1 Function (f) 0 <= t <= 79, so uint8_t. B,C,D words
