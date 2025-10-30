@@ -6,12 +6,12 @@ Working - Partially Tested
 
 ## Installation
 1. Place `sha1.h` into `/usr/include`, then use it with:
-```
+```c
 #include <sha1.h>
 ```
 
 ## Example Usage
-```
+```c
 unsigned char* text_str = "this text will be hashed";
 unsigned char* sha1_hash = sha1(text_str);
 ```
