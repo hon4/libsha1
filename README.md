@@ -4,6 +4,9 @@ An open source, indepedent and easy to use SHA1 for C/C++.
 ## Satus
 Working - Partially Tested
 
+## Requirements
+- STD: C89 or newer
+
 ## Installation
 Place `sha1.h` into `/usr/include`, then use it with:
 ```c
