@@ -27,4 +27,4 @@ gcc example.c -o example -lsha1
 ```
 
 ## Tests
-For test info see (TESTS.md)[TESTS.md]
+For test info see [TESTS.md](TESTS.md)
