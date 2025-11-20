@@ -1,2 +1,2 @@
-lib_LTLIBRARIES = sha1.la
-libmylib_la_SOURCES = sha1.c
+lib_LTLIBRARIES = libsha1.la
+libsha1_la_SOURCES = sha1.c
