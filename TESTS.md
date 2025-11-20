@@ -4,6 +4,7 @@
 |-----------------------|---------|--------|-------|
 | AlpineLinux 3.21      | x86_64  | Pass   |       |
 | Termux (on Android 9) | aarch64 | Pass   |       |
+| AlpineLinux 3.22      | x86     | Pass   |       |
 
 ## Arch Name Conflicts
 + x86_64 = amd64
