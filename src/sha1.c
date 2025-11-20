@@ -21,9 +21,18 @@
 extern "C" {
 #endif
 
-
 // Define Endianness (1=Little-Endian, 0=Big-Endian)
-#define __LIBSHA1_USE_ENDIANNESS__ 1 //You can modify this line if your compiler do not automatically detects endianness
+// Now gets endianness from configure
+#include "config.h"
+#if WORDS_BIGENDIAN == 0
+	//Little-Endian received from configure
+	#define __LIBSHA1_USE_ENDIANNESS__ 1
+#elif WORDS_BIGENDIAN == 1
+	//Big-Endian received from configure
+	#define __LIBSHA1_USE_ENDIANNESS__ 0
+#else
+	#error "Endianness not defined"
+#endif
 //Do NOT change the following
 #define __LIBSHA1_LITTLE_ENDIAN__ 1
 #define __LIBSHA1_BIG_ENDIAN__ 0
