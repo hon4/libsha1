@@ -2,7 +2,7 @@
 An open source, indepedent and easy to use SHA1 for C/C++.
 
 ## Satus
-Working - Partially Tested
+v0.0.1 - First Tested Version
 
 ## Requirements
 - STD: C89 or newer
