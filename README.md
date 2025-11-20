@@ -20,3 +20,8 @@ unsigned char* sha1_hash = sha1(text_str);
 ```
 For a complete example, see [example.c](example.c).
 
+When compiling use `-lsha1` to include the library.
+For example.c:
+```
+gcc example.c -o example -lsha1
+```
