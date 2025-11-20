@@ -28,4 +28,5 @@ gcc example.c -o example -lsha1
 
 ## Tests
 You can compile example.c to test the lib. If output is `A94A8FE5CCB19BA61C4C0873D391E987982FBBD3`, it means that the lib is working correctly.
+
 For test info see [TESTS.md](TESTS.md)
