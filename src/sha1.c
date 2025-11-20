@@ -4,7 +4,7 @@
 ╚══════════════════╝
 │ Coded by: hon    │
 │ Version: 0.0.1   │
-│ Date: 2025-10-30 │
+│ Date: 2025-11-20 │
 └──────────────────┘
 */
 /*
@@ -24,12 +24,12 @@ extern "C" {
 // Define Endianness (1=Little-Endian, 0=Big-Endian)
 // Now gets endianness from configure
 #include "config.h"
-#if WORDS_BIGENDIAN == 0
-	//Little-Endian received from configure
-	#define __LIBSHA1_USE_ENDIANNESS__ 1
-#elif WORDS_BIGENDIAN == 1
+#if defined(WORDS_BIGENDIAN) && WORDS_BIGENDIAN == 1
 	//Big-Endian received from configure
 	#define __LIBSHA1_USE_ENDIANNESS__ 0
+#elif WORDS_BIGENDIAN == 0
+	//Little-Endian received from configure
+	#define __LIBSHA1_USE_ENDIANNESS__ 1
 #else
 	#error "Endianness not defined"
 #endif
