@@ -18,8 +18,18 @@
 #ifndef LIBSHA1_SHA1_H
 #define LIBSHA1_SHA1_H
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+
 #include <stdint.h>
 
 uint8_t* sha1(const uint8_t* str);
+
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif
