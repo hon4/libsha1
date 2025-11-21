@@ -8,5 +8,5 @@
 | AlpineLinux 3.22      | s390x   | BIG    | GCC 14.2.0   | Pass   | Updated To Autodetect Endianness |
 
 ## Arch Name Conflicts
-+ x86_64 = amd64
-+ x86 = IA-32
++ amd64 = x86_64, x64
++ IA-32 = x86
