@@ -152,7 +152,7 @@ uint8_t* sha1(const uint8_t* str) {
 	/* Add the uint64_t bitlen at the last two uint32_t words of the last block */
 	// No endianess switch for the bit_len uint64(2 * uint32_t) because it's genned by the CPU and has the machines' arch already.
 	M[block_count-1][14] = (uint32_t)(bit_len >> 32);
-	M[block_count-1][15] = (uint32_t)(bit_len & 0xFFFFFFFF);
+	M[block_count-1][15] = (uint32_t)bit_len;
 
 
 	/* SHA1 Calculation using RFC3174 Method 1 */
