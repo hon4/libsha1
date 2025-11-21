@@ -116,7 +116,7 @@ uint32_t sha1_const(uint8_t t) {
 //Calculation Helper Function
 uint64_t calc_pad_size(uint64_t l) {
 	//Need benchmarks on x86, on aarch64/arm64 method 2 with inline +9 +63 gives the highest speed
-	return ((l + 63) / 64);	//Method 2
+	return ((l + 63 + 9) / 64);	//Method 2 (+9 moved from sha1 function to result less instructions and highest speed)
 	//return (l / 64) + 1;	//Method 1
 }
 
@@ -132,7 +132,7 @@ uint32_t endian_le2be(uint32_t i) {
 uint8_t* sha1(const uint8_t* str) {
 	uint64_t len = (uint64_t)strlen((char*)str);
 	uint64_t bit_len = len * 8;
-	uint64_t block_count = calc_pad_size(len + 9); //+9 = +1 for 0x80 and +8 for uint64
+	uint64_t block_count = calc_pad_size(len); //+9 = +1 for 0x80 and +8 for uint64 (+9 moved to calc_pad_size function for speed improvement)
 	uint32_t M[block_count][16];
 	memset(M, 0x00, block_count * 16 * sizeof(uint32_t));
 
