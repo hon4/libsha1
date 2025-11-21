@@ -1,6 +1,9 @@
 # hon's libSHA1
 An open source, indepedent and easy to use SHA1 for C/C++.
 
+## General Note
+2025-11-21: The `autoconf` branch renamed to `main` and set as the default. The old `main` that contains the raw .h file renamed to `old_raw`.
+
 ## Satus
 v0.0.1 - First Tested Version
 
