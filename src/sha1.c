@@ -14,12 +14,7 @@
  * This program is free and open source software.
  * License: GPL-2.0
 */
-#ifndef _SHA1_H
-#define _SHA1_H
 
-#ifdef __cplusplus
-extern "C" {
-#endif
 
 // Define Endianness (1=Little-Endian, 0=Big-Endian)
 // Now gets endianness from configure
@@ -218,9 +213,3 @@ uint8_t* sha1(const uint8_t* str) {
 
 	return ret;
 }
-
-#ifdef __cplusplus
-}
-#endif
-
-#endif // SHA1_H
