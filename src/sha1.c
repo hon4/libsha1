@@ -111,8 +111,8 @@ uint32_t sha1_const(uint8_t t) {
 //Calculation Helper Function
 uint64_t calc_pad_size(uint64_t l) {
 	//Need benchmarks on x86, on aarch64/arm64 method 2 with inline +9 +63 gives the highest speed
-	return ((l + 63 + 9) / 64);	//Method 2 (+9 moved from sha1 function to result less instructions and highest speed)
-	//return (l / 64) + 1;	//Method 1
+	return ((l + 63 + 9) / 64);	//Method 2 (+9 moved from sha1 function to result less instructions and highest speed), a=(l + 63 + 9), 1 instruction (+63 +9 = +72 in compile time), b=(a / 64) 1 instruction, total 2 instructions (1x add, 1x div)
+	//return (l + 9 / 64) + 1;	//Method 1 a=(l + 9) 1 instruction, b=(a / 64) 1 instruction, c=(b + 1) 1 instruction, total 3 instruction (2x add, 1x div)
 }
 
 uint32_t endian_le2be(uint32_t i) {
