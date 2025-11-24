@@ -208,7 +208,7 @@ uint8_t* sha1(const uint8_t* str) {
 	/* End RFC3174 Method 1 */
 
 	/* Convert H0, H1, H2, H3, H4 to a uint8_t* */
-	static uint8_t ret[20]; //20bytes is the SHA1 giest length
+	static uint8_t ret[20]; //20bytes is the SHA1 digest length
 	uint32_t* H = (uint32_t*)ret;
 	#if defined(__LIBSHA1_USE_ENDIANNESS__) && (__LIBSHA1_USE_ENDIANNESS__ == __LIBSHA1_LITTLE_ENDIAN__)
 	//Endianness change required only in Little-Endian
