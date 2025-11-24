@@ -121,6 +121,8 @@ uint32_t endian_le2be(uint32_t i) {
 			((i >> 8) & 0x0000FF00) |
 			((i << 8) & 0x00FF0000) |
 			((i << 24) & 0xFF000000);
+	#else
+	return i; //Big-Endian: No need anything
 	#endif
 }
 
@@ -139,10 +141,13 @@ uint8_t* sha1(const uint8_t* str) {
 
 	((uint8_t*)M)[len] = 0x80; //Add the 0x80 = 0b10000000 at the end of the str
 
+	#if defined(__LIBSHA1_USE_ENDIANNESS__) && (__LIBSHA1_USE_ENDIANNESS__ == __LIBSHA1_LITTLE_ENDIAN__)
+	//Big-Endian to Little-Endian prevent useless for loop in Big-Endian
 	uint64_t iword;
 	for (iword = 0; iword < block_count * 16; iword++) {
 		((uint32_t*)M)[iword] = endian_le2be(((uint32_t*)M)[iword]);
 	}
+	#endif
 
 	/* Add the uint64_t bitlen at the last two uint32_t words of the last block */
 	// No endianess switch for the bit_len uint64(2 * uint32_t) because it's genned by the CPU and has the machines' arch already.
