@@ -142,7 +142,7 @@ uint8_t* sha1(const uint8_t* str) {
 	((uint8_t*)M)[len] = 0x80; //Add the 0x80 = 0b10000000 at the end of the str
 
 	#if defined(__LIBSHA1_USE_ENDIANNESS__) && (__LIBSHA1_USE_ENDIANNESS__ == __LIBSHA1_LITTLE_ENDIAN__)
-	//Big-Endian to Little-Endian prevent useless for loop in Big-Endian
+	//Big-Endian to Little-Endian prevent useless for loop in Big-Endian, only used in Little-Endian
 	uint64_t iword;
 	for (iword = 0; iword < block_count * 16; iword++) {
 		((uint32_t*)M)[iword] = endian_le2be(((uint32_t*)M)[iword]);
@@ -210,11 +210,20 @@ uint8_t* sha1(const uint8_t* str) {
 	/* Convert H0, H1, H2, H3, H4 to a uint8_t* */
 	static uint8_t ret[20]; //20bytes is the SHA1 giest length
 	uint32_t* H = (uint32_t*)ret;
+	#if defined(__LIBSHA1_USE_ENDIANNESS__) && (__LIBSHA1_USE_ENDIANNESS__ == __LIBSHA1_LITTLE_ENDIAN__)
+	//Endianness change required only in Little-Endian
 	H[0] = endian_le2be(H0);
 	H[1] = endian_le2be(H1);
 	H[2] = endian_le2be(H2);
 	H[3] = endian_le2be(H3);
 	H[4] = endian_le2be(H4);
+	#else
+	H[0] = H0;
+	H[1] = H1;
+	H[2] = H2;
+	H[3] = H3;
+	H[4] = H4;
+	#endif
 
 	return ret;
 }
