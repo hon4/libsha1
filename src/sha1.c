@@ -8,7 +8,7 @@
 └──────────────────┘
 */
 /*
- * This file (sha1.h) is part of hon's libSHA1
+ * This file (sha1.c) is part of hon's libSHA1
  * Copyright (C) 2025 hon
  *
  * This program is free and open source software.
@@ -35,6 +35,7 @@
 #include <stdint.h>
 #include <string.h>
 
+#include "sha1.h"
 /*
 General SHA1 to C info
 ==========================
