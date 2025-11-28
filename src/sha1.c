@@ -255,8 +255,14 @@ void SHA1_Process_Block(SHA1_CTX* context) {
 	for (__libsha1_tmp_i2 = 0; __libsha1_tmp_i2 < 16; __libsha1_tmp_i2++) {
 		W[__libsha1_tmp_i2] = buffer32[__libsha1_tmp_i2];
 	}
-	
-	///// !!!! Probably Endianness-Switch here
+
+	#if defined(__LIBSHA1_USE_ENDIANNESS__) && (__LIBSHA1_USE_ENDIANNESS__ == __LIBSHA1_LITTLE_ENDIAN__)
+	//Big-Endian to Little-Endian prevent useless for loop in Big-Endian, only used in Little-Endian
+	uint64_t iword;
+	for (iword = 0; iword < 16; iword++) {
+		W[iword] = endian_le2be(W[iword]);
+	}
+	#endif
 
 	//Method 1 Step B
 	uint8_t __libsha1_tmp_t1;
