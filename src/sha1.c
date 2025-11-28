@@ -312,6 +312,7 @@ void SHA1_Update(SHA1_CTX* context, const uint8_t* data) {
 		len -= 64 - unhashed;
 		processed_len += 64 - unhashed;
 		unhashed = 0;
+		SHA1_Process_Block(context);
 	}
 	
 	memcpy(&context->buffer[unhashed], &data[processed_len], len);
