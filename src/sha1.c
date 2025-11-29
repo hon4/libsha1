@@ -299,14 +299,14 @@ void SHA1_Process_Block(SHA1_CTX* context) {
 void SHA1_Update(SHA1_CTX* context, const uint8_t* data) {
 	uint64_t len = (uint64_t)strlen(data);
 	uint8_t unhashed = context->total_len % 64; //64 = block size in bytes
-	
+
 	//len as remain_len
 	uint64_t processed_len = 0;
-	
+
 	if (unhashed + len < 64) {
 		return;
 	}
-	
+
 	while (unhashed + len > 63) {
 		memcpy(&context->buffer[unhashed], &data[processed_len], 64 - unhashed); //copy to fill buff
 		len -= 64 - unhashed;
@@ -314,7 +314,7 @@ void SHA1_Update(SHA1_CTX* context, const uint8_t* data) {
 		unhashed = 0;
 		SHA1_Process_Block(context);
 	}
-	
+
 	memcpy(&context->buffer[unhashed], &data[processed_len], len);
 	context->total_len += len;
 }
@@ -323,17 +323,17 @@ void SHA1_Final(uint8_t digest[20], SHA1_CTX* context) {
 	//Prepare The Last Block
 	uint8_t unhashed = context->total_len % 64;
 	memset(&context->buffer[unhashed], 0x00, 64 - (unhashed * sizeof(uint8_t)));
-	
+
 	context->buffer[unhashed] = 0x80;			//The 0b10000000
 	uint64_t bit_len = context->total_len;		//The required bit len
-	
+
 	uint32_t* buffer32 = (uint32_t*)context->buffer;
 	buffer32[14] = (uint32_t)(bit_len >> 32);
 	buffer32[15] = (uint32_t)bit_len;
-	
+
 	//Hash the final block
 	SHA1_Process_Block(context);
-	
+
 	//Build the SHA1 digest
 	uint32_t* H = (uint32_t*)digest;
 	#if defined(__LIBSHA1_USE_ENDIANNESS__) && (__LIBSHA1_USE_ENDIANNESS__ == __LIBSHA1_LITTLE_ENDIAN__)
