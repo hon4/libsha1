@@ -325,7 +325,7 @@ void SHA1_Final(uint8_t digest[20], SHA1_CTX* context) {
 	memset(&context->buffer[unhashed], 0x00, 64 - (unhashed * sizeof(uint8_t)));
 
 	context->buffer[unhashed] = 0x80;			//The 0b10000000
-	uint64_t bit_len = context->total_len;		//The required bit len
+	uint64_t bit_len = context->total_len * 8;		//The required bit len
 
 	uint32_t* buffer32 = (uint32_t*)context->buffer;
 	buffer32[14] = (uint32_t)(bit_len >> 32);
