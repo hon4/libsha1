@@ -8,7 +8,7 @@ int main() {
     unsigned char hash[20];
 
     SHA1_Init(&context);
-    SHA1_Update(&context, input);  // Uses strlen() as in your library
+    SHA1_Update(&context, input);  // Thanks to mmxsrup.
     SHA1_Final(hash, &context);
 
     // Print the SHA-1 hash in hexadecimal format
