@@ -303,10 +303,6 @@ void SHA1_Update(SHA1_CTX* context, const uint8_t* data) {
 	//len as remain_len
 	uint64_t processed_len = 0;
 
-	if (unhashed + len < 64) {
-		return;
-	}
-
 	while (unhashed + len > 63) {
 		memcpy(&context->buffer[unhashed], &data[processed_len], 64 - unhashed); //copy to fill buff
 		len -= 64 - unhashed;
