@@ -89,26 +89,26 @@ uint32_t sha1_snx(uint8_t n, uint32_t X) {
 
 //The SHA1 Function (f) 0 <= t <= 79, so uint8_t. B,C,D words
 uint32_t sha1_funct(uint8_t t, uint32_t B, uint32_t C, uint32_t D) {
-	if (t <= 19) {			//  0 <= t <= 19
+	if (t <= 19) {		//  0 <= t <= 19
 		return (B & C) | ((~B) & D);
 	} else if (t <= 39) {	// 20 <= t <= 39
 		return B ^ C ^ D;
 	} else if (t <= 59) {	// 40 <= t <= 59
 		return (B & C) | (B & D) | (C & D);
-	} else {				// 60 <= t <= 79
+	} else {		// 60 <= t <= 79
 		return B ^ C ^ D;
 	}
 }
 
 //The SHA1 Constant (K). 0 <= t <= 79, so uint8_t
 uint32_t sha1_const(uint8_t t) {
-	if (t <= 19) {			//  0 <= t <= 19
+	if (t <= 19) {		//  0 <= t <= 19
 		return 0x5A827999;
 	} else if (t <= 39) {	// 20 <= t <= 39
 		return 0x6ED9EBA1;
 	} else if (t <= 59) {	// 40 <= t <= 59
 		return 0x8F1BBCDC;
-	} else {				// 60 <= t <= 79
+	} else {		// 60 <= t <= 79
 		return 0xCA62C1D6;
 	}
 }
