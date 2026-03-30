@@ -33,10 +33,10 @@
 #define __LIBSHA1_LITTLE_ENDIAN__ 1
 #define __LIBSHA1_BIG_ENDIAN__ 0
 
+#include "sha1.h"
 #include <stdint.h>
 #include <string.h>
 
-#include "sha1.h"
 /*
 General SHA1 to C info
 ==========================
