@@ -19,7 +19,7 @@ At the beginning of the file:
 Then:
 ```c
 unsigned char* text_str = "this text will be hashed";
-unsigned char* sha1_hash = sha1(text_str);
+unsigned char* sha1_hash = sha1(text_str, strlen(input));
 ```
 For complete examples, see [examples directory](examples).
 
