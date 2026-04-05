@@ -32,7 +32,7 @@ typedef struct {
 	uint8_t buffer[64];	// a single 512 bit block buffer
 } SHA1_CTX;
 
-uint8_t* sha1(const uint8_t* str);
+uint8_t* sha1(const uint8_t* str, const uint64_t len);
 
 void SHA1_Init(SHA1_CTX* context);
 void SHA1_Update(SHA1_CTX* context, const uint8_t* data);
