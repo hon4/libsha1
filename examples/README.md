@@ -11,3 +11,6 @@ The `build.sh` script will compile examples from .c files to binaries using `gcc
 example1.c -> e1
 
 example2.c -> e2
+
+### Note
+libSHA1 must be installed on your machine for `build.sh` to work properly.
