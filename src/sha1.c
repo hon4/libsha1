@@ -131,8 +131,9 @@ uint32_t endian_le2be(uint32_t i) {
 	#endif
 }
 
-uint8_t* sha1(const uint8_t* str) {
-	uint64_t len = (uint64_t)strlen(str);
+/* 0.0.4+ Receive len from called to be able to support binary data */
+uint8_t* sha1(const uint8_t* str, const uint64_t len) {
+	/*uint64_t len = (uint64_t)strlen(str);*/
 	uint64_t bit_len = len * 8;
 	uint64_t block_count = calc_pad_size(len); //+9 = +1 for 0x80 and +8 for uint64 (+9 moved to calc_pad_size function for speed improvement)
 	uint32_t M[block_count][16];
