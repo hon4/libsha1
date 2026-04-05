@@ -21,7 +21,7 @@ Then:
 unsigned char* text_str = "this text will be hashed";
 unsigned char* sha1_hash = sha1(text_str);
 ```
-For a complete example, see [examples](examples directory).
+For a complete example, see [examples directory](examples).
 
 When compiling use `-lsha1` to include the library.
 For example.c:
