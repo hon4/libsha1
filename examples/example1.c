@@ -7,7 +7,7 @@ int main() {
 	const unsigned char* input = (unsigned char*)"test";
 
 	/* Calculate SHA-1 hash */
-	unsigned char* hash = sha1(input, strlen(input));
+	unsigned char* hash = sha1(input, strlen((char*)input));
 
 	/* Print the SHA-1 hash in hexadecimal format */
 	int i;
