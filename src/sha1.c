@@ -324,9 +324,11 @@ void SHA1_Final(uint8_t digest[20], SHA1_CTX* context) {
 	context->buffer[unhashed] = 0x80;			//The 0b10000000
 	uint64_t bit_len = context->total_len * 8;		//The required bit len
 
-	uint32_t* buffer32 = (uint32_t*)context->buffer;
-	buffer32[14] = (uint32_t)(bit_len >> 32);
-	buffer32[15] = (uint32_t)bit_len;
+	//uint32_t* buffer32 = (uint32_t*)context->buffer;
+	//buffer32[14] = (uint32_t)(bit_len >> 32);
+	//buffer32[15] = (uint32_t)bit_len;
+	uint64_t bit_len_be = __builtin_bswap64(bit_len);
+	memcpy(&context->buffer[56], &bit_len_be, 8);
 
 	//Hash the final block
 	SHA1_Process_Block(context);
