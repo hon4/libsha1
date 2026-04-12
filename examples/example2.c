@@ -12,7 +12,8 @@ int main() {
 	SHA1_Final(hash, &context);
 
 	/* Print the SHA-1 hash in hexadecimal format */
-	for (int i = 0; i < 20; i++) {
+	int i;
+	for (i = 0; i < 20; i++) {
 		printf("%02X", hash[i]);
 	}
 	printf("\n");
