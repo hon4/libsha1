@@ -14,22 +14,22 @@
  * This program is free and open source software.
  * License: GPL-2.0
 */
-// Thanks to mmxsrup (https://github.com/mmxsrup) for SHA1 Calculation in parts. Used ideas from https://github.com/mmxsrup/libsha1
+/* Thanks to mmxsrup (https://github.com/mmxsrup) for SHA1 Calculation in parts. Used ideas from https://github.com/mmxsrup/libsha1 */
 
 
-// Define Endianness (1=Little-Endian, 0=Big-Endian)
-// Now gets endianness from configure
+/* Define Endianness (1=Little-Endian, 0=Big-Endian) */
+/* Now gets endianness from configure */
 #include "config.h"
 #if defined(WORDS_BIGENDIAN) && WORDS_BIGENDIAN == 1
-	//Big-Endian received from configure
+	/* Big-Endian received from configure */
 	#define __LIBSHA1_USE_ENDIANNESS__ 0
 #elif WORDS_BIGENDIAN == 0
-	//Little-Endian received from configure
+	/* Little-Endian received from configure */
 	#define __LIBSHA1_USE_ENDIANNESS__ 1
 #else
 	#error "Endianness not defined"
 #endif
-//Do NOT change the following
+/* Do NOT change the following */
 #define __LIBSHA1_LITTLE_ENDIAN__ 1
 #define __LIBSHA1_BIG_ENDIAN__ 0
 
