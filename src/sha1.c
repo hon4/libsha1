@@ -34,8 +34,10 @@
 
 
 /* ==== DIRECTLY CHANGEABLE MACROS START ==== */
-/* Set __LIBSHA1_USE_STATIC_INLINE__ = 1 to enable static inline for basic embedded functions (1=On, 0=Off) */
+/* (1=On, 0=Off) Enables static inline for basic embedded functions */
 #define __LIBSHA1_USE_STATIC_INLINE__ 1
+/* (1=On, 0=Off) Replaces basic embedded functions with macros for better speed */
+#define __LIBSHA1_USE_MACRO_FUNCTIONS__ 0
 /* ==== DIRECTLY CHANGEABLE MACROS END ==== */
 
 
