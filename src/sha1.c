@@ -120,61 +120,96 @@ Other Notes:
 #endif
 
 /* The SHA1 Function (f) 0 <= t <= 79, so uint8_t. B,C,D words */
-#if defined(__LIBSHA1_USE_STATIC_INLINE__) && __LIBSHA1_USE_STATIC_INLINE__ == 1
-	static inline
-#endif
-uint32_t sha1_funct(uint8_t t, uint32_t B, uint32_t C, uint32_t D) {
-	if (t <= 19) {		/*  0 <= t <= 19 */
-		return (B & C) | ((~B) & D);
-	} else if (t <= 39) {	/* 20 <= t <= 39 */
-		return B ^ C ^ D;
-	} else if (t <= 59) {	/* 40 <= t <= 59 */
-		return (B & C) | (B & D) | (C & D);
-	} else {		/* 60 <= t <= 79 */
-		return B ^ C ^ D;
+#if !defined(__LIBSHA1_USE_MACRO_FUNCTIONS__) || __LIBSHA1_USE_MACRO_FUNCTIONS__ == 0
+	#if defined(__LIBSHA1_USE_STATIC_INLINE__) && __LIBSHA1_USE_STATIC_INLINE__ == 1
+		static inline
+	#endif
+	uint32_t sha1_funct(uint8_t t, uint32_t B, uint32_t C, uint32_t D) {
+		if (t <= 19) {		/*  0 <= t <= 19 */
+			return (B & C) | ((~B) & D);
+		} else if (t <= 39) {	/* 20 <= t <= 39 */
+			return B ^ C ^ D;
+		} else if (t <= 59) {	/* 40 <= t <= 59 */
+			return (B & C) | (B & D) | (C & D);
+		} else {		/* 60 <= t <= 79 */
+			return B ^ C ^ D;
+		}
 	}
-}
+#else
+	#define sha1_funct(t, B, C, D) ( \
+		((t) <= 19) ? (((B) & (C)) | ((~(B)) & (D))) : \
+		((t) <= 39) ? ((B) ^ (C) ^ (D)) : \
+		((t) <= 59) ? (((B) & (C)) | ((B) & (D)) | ((C) & (D))) : \
+		((B) ^ (C) ^ (D)) \
+	)
+#endif
 
 /* The SHA1 Constant (K). 0 <= t <= 79, so uint8_t */
-#if defined(__LIBSHA1_USE_STATIC_INLINE__) && __LIBSHA1_USE_STATIC_INLINE__ == 1
-	static inline
-#endif
-uint32_t sha1_const(uint8_t t) {
-	if (t <= 19) {		/*  0 <= t <= 19 */
-		return 0x5A827999;
-	} else if (t <= 39) {	/* 20 <= t <= 39 */
-		return 0x6ED9EBA1;
-	} else if (t <= 59) {	/* 40 <= t <= 59 */
-		return 0x8F1BBCDC;
-	} else {		/* 60 <= t <= 79 */
-		return 0xCA62C1D6;
+#if !defined(__LIBSHA1_USE_MACRO_FUNCTIONS__) || __LIBSHA1_USE_MACRO_FUNCTIONS__ == 0
+	#if defined(__LIBSHA1_USE_STATIC_INLINE__) && __LIBSHA1_USE_STATIC_INLINE__ == 1
+		static inline
+	#endif
+	uint32_t sha1_const(uint8_t t) {
+		if (t <= 19) {		/*  0 <= t <= 19 */
+			return 0x5A827999;
+		} else if (t <= 39) {	/* 20 <= t <= 39 */
+			return 0x6ED9EBA1;
+		} else if (t <= 59) {	/* 40 <= t <= 59 */
+			return 0x8F1BBCDC;
+		} else {		/* 60 <= t <= 79 */
+			return 0xCA62C1D6;
+		}
 	}
-}
+#else
+	#define sha1_const(t) ( \
+		((t) <= 19) ? 0x5A827999 : \
+		((t) <= 39) ? 0x6ED9EBA1 : \
+		((t) <= 59) ? 0x8F1BBCDC : \
+		0xCA62C1D6 \
+	)
+#endif
 
 /* Calculation Helper Function */
-#if defined(__LIBSHA1_USE_STATIC_INLINE__) && __LIBSHA1_USE_STATIC_INLINE__ == 1
-	static inline
+#if !defined(__LIBSHA1_USE_MACRO_FUNCTIONS__) || __LIBSHA1_USE_MACRO_FUNCTIONS__ == 0
+	#if defined(__LIBSHA1_USE_STATIC_INLINE__) && __LIBSHA1_USE_STATIC_INLINE__ == 1
+		static inline
+	#endif
+	uint64_t calc_pad_size(uint64_t l) {
+		/*Need benchmarks on x86, on aarch64/arm64 method 2 with inline +9 +63 gives the highest speed */
+		return ((l + 72) / 64);	/* Method 2 (+9 moved from sha1 function to result less instructions and highest speed), a=(l + 63 + 9), 1 instruction (+63 +9 = +72 in compile time), b=(a / 64) 1 instruction, total 2 instructions (1x add, 1x div) (+72 = +63 +9 - for non-auto optimize c compilers) */
+		/* return (l + 9 / 64) + 1;	//Method 1 a=(l + 9) 1 instruction, b=(a / 64) 1 instruction, c=(b + 1) 1 instruction, total 3 instruction (2x add, 1x div) */
+	}
+#else
+	#define calc_pad_size(l) (((l) + 72) / 64)
 #endif
-uint64_t calc_pad_size(uint64_t l) {
-	/*Need benchmarks on x86, on aarch64/arm64 method 2 with inline +9 +63 gives the highest speed */
-	return ((l + 72) / 64);	/* Method 2 (+9 moved from sha1 function to result less instructions and highest speed), a=(l + 63 + 9), 1 instruction (+63 +9 = +72 in compile time), b=(a / 64) 1 instruction, total 2 instructions (1x add, 1x div) (+72 = +63 +9 - for non-auto optimize c compilers) */
-	/* return (l + 9 / 64) + 1;	//Method 1 a=(l + 9) 1 instruction, b=(a / 64) 1 instruction, c=(b + 1) 1 instruction, total 3 instruction (2x add, 1x div) */
-}
 
 /* Endianness change function (Little-Endian to Big-Endian) */
-#if defined(__LIBSHA1_USE_STATIC_INLINE__) && __LIBSHA1_USE_STATIC_INLINE__ == 1
-	static inline
-#endif
-uint32_t endian_le2be(uint32_t i) {
-	#if defined(__LIBSHA1_USE_ENDIANNESS__) && (__LIBSHA1_USE_ENDIANNESS__ == __LIBSHA1_LITTLE_ENDIAN__)
-	return ((i >> 24) & 0x000000FF) |
-			((i >> 8) & 0x0000FF00) |
-			((i << 8) & 0x00FF0000) |
-			((i << 24) & 0xFF000000);
-	#else
-	return i; /* Big-Endian: No need anything */
+#if !defined(__LIBSHA1_USE_MACRO_FUNCTIONS__) || __LIBSHA1_USE_MACRO_FUNCTIONS__ == 0
+	#if defined(__LIBSHA1_USE_STATIC_INLINE__) && __LIBSHA1_USE_STATIC_INLINE__ == 1
+		static inline
 	#endif
-}
+	uint32_t endian_le2be(uint32_t i) {
+		#if defined(__LIBSHA1_USE_ENDIANNESS__) && (__LIBSHA1_USE_ENDIANNESS__ == __LIBSHA1_LITTLE_ENDIAN__)
+		return ((i >> 24) & 0x000000FF) |
+				((i >> 8) & 0x0000FF00) |
+				((i << 8) & 0x00FF0000) |
+				((i << 24) & 0xFF000000);
+		#else
+		return i; /* Big-Endian: No need anything */
+		#endif
+	}
+#else
+	#if defined(__LIBSHA1_USE_ENDIANNESS__) && (__LIBSHA1_USE_ENDIANNESS__ == __LIBSHA1_LITTLE_ENDIAN__)
+		#define endian_le2be(i) ( \
+			(((i) >> 24) & 0x000000FF) | \
+			(((i) >> 8) & 0x0000FF00) | \
+			(((i) << 8) & 0x00FF0000) | \
+			(((i) << 24) & 0xFF000000) \
+		)
+	#else
+		#define endian_le2be(i) (i)
+	#endif
+#endif
 
 /* 0.0.4+ Receive len from called to be able to support binary data */
 uint8_t* sha1(const uint8_t* str, const uint64_t len) {
