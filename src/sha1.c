@@ -37,7 +37,7 @@
 /* (1=On, 0=Off) Enables static inline for basic embedded functions */
 #define __LIBSHA1_USE_STATIC_INLINE__ 1
 /* (1=On, 0=Off) Replaces basic embedded functions with macros for better speed */
-#define __LIBSHA1_USE_MACRO_FUNCTIONS__ 0
+#define __LIBSHA1_USE_MACRO_FUNCTIONS__ 1
 /* ==== DIRECTLY CHANGEABLE MACROS END ==== */
 
 
@@ -96,25 +96,32 @@ Other Notes:
 */
 
 /* The SHA1 Addition Function (auto pad to uint32 no need for mod 2^32 or and bitmask to 32bit */
-#if defined(__LIBSHA1_USE_STATIC_INLINE__) && __LIBSHA1_USE_STATIC_INLINE__ == 1
-static inline
+#if !defined(__LIBSHA1_USE_MACRO_FUNCTIONS__) || __LIBSHA1_USE_MACRO_FUNCTIONS__ == 0
+	#if defined(__LIBSHA1_USE_STATIC_INLINE__) && __LIBSHA1_USE_STATIC_INLINE__ == 1
+		static inline
+	#endif
+	uint32_t sha1_add(uint32_t X, uint32_t Y) {
+		return X + Y;
+	}
+#else
+	#define sha1_add(X, Y) ((X) + (Y))
 #endif
-uint32_t sha1_add(uint32_t X, uint32_t Y) {
-	return X + Y;
-}
-/*#define sha1_add(X, Y) ((X) + (Y))*/
 
 /* The SHA1 Circular BitShift S^n(X) */
-#if defined(__LIBSHA1_USE_STATIC_INLINE__) && __LIBSHA1_USE_STATIC_INLINE__ == 1
-static inline
+#if !defined(__LIBSHA1_USE_MACRO_FUNCTIONS__) || __LIBSHA1_USE_MACRO_FUNCTIONS__ == 0
+	#if defined(__LIBSHA1_USE_STATIC_INLINE__) && __LIBSHA1_USE_STATIC_INLINE__ == 1
+		static inline
+	#endif
+	uint32_t sha1_snx(uint8_t n, uint32_t X) {
+		return (X << n) | (X >> (32-n)); /* Ensure the - is executed before the BitShift */
+	}
+#else
+	#define sha1_snx(n, X) (((X) << (n)) | ((X) >> (32 - (n))))
 #endif
-uint32_t sha1_snx(uint8_t n, uint32_t X) {
-	return (X << n) | (X >> (32-n)); /* Ensure the - is executed before the BitShift */
-}
 
 /* The SHA1 Function (f) 0 <= t <= 79, so uint8_t. B,C,D words */
 #if defined(__LIBSHA1_USE_STATIC_INLINE__) && __LIBSHA1_USE_STATIC_INLINE__ == 1
-static inline
+	static inline
 #endif
 uint32_t sha1_funct(uint8_t t, uint32_t B, uint32_t C, uint32_t D) {
 	if (t <= 19) {		/*  0 <= t <= 19 */
@@ -130,7 +137,7 @@ uint32_t sha1_funct(uint8_t t, uint32_t B, uint32_t C, uint32_t D) {
 
 /* The SHA1 Constant (K). 0 <= t <= 79, so uint8_t */
 #if defined(__LIBSHA1_USE_STATIC_INLINE__) && __LIBSHA1_USE_STATIC_INLINE__ == 1
-static inline
+	static inline
 #endif
 uint32_t sha1_const(uint8_t t) {
 	if (t <= 19) {		/*  0 <= t <= 19 */
@@ -146,7 +153,7 @@ uint32_t sha1_const(uint8_t t) {
 
 /* Calculation Helper Function */
 #if defined(__LIBSHA1_USE_STATIC_INLINE__) && __LIBSHA1_USE_STATIC_INLINE__ == 1
-static inline
+	static inline
 #endif
 uint64_t calc_pad_size(uint64_t l) {
 	/*Need benchmarks on x86, on aarch64/arm64 method 2 with inline +9 +63 gives the highest speed */
@@ -156,7 +163,7 @@ uint64_t calc_pad_size(uint64_t l) {
 
 /* Endianness change function (Little-Endian to Big-Endian) */
 #if defined(__LIBSHA1_USE_STATIC_INLINE__) && __LIBSHA1_USE_STATIC_INLINE__ == 1
-static inline
+	static inline
 #endif
 uint32_t endian_le2be(uint32_t i) {
 	#if defined(__LIBSHA1_USE_ENDIANNESS__) && (__LIBSHA1_USE_ENDIANNESS__ == __LIBSHA1_LITTLE_ENDIAN__)
