@@ -3,8 +3,8 @@
 ║ hon libSHA1      ║
 ╚══════════════════╝
 │ Coded by: hon    │
-│ Version: 0.1.0   │
-│ Date: 2026-04-12 │
+│ Version: 0.2.0   │
+│ Date: 2026-09-10 │
 └──────────────────┘
 */
 /*
@@ -212,7 +212,8 @@ Other Notes:
 #endif
 
 /* 0.0.4+ Receive len from called to be able to support binary data */
-uint8_t* sha1(const uint8_t* str, const uint64_t len) {
+/* 0.2.0+ Switched to return void and get hash return variable from caller */
+void SHA1(const uint8_t* str, const uint64_t len, uint8_t ret[20]) {
 	/*uint64_t len = (uint64_t)strlen(str);*/
 	uint64_t bit_len = len * 8;
 	uint64_t block_count = calc_pad_size(len); /* +9 = +1 for 0x80 and +8 for uint64 (+9 moved to calc_pad_size function for speed improvement) */
@@ -295,7 +296,7 @@ uint8_t* sha1(const uint8_t* str, const uint64_t len) {
 	/* End RFC3174 Method 1 */
 
 	/* Convert H0, H1, H2, H3, H4 to a uint8_t* */
-	static uint8_t ret[20]; /* 20bytes is the SHA1 digest length */
+	/* 0.2.0+ directly write to received ret. old code: static uint8_t ret[20]; /* 20bytes is the SHA1 digest length */
 	uint32_t* H = (uint32_t*)ret;
 	#if defined(__LIBSHA1_USE_ENDIANNESS__) && (__LIBSHA1_USE_ENDIANNESS__ == __LIBSHA1_LITTLE_ENDIAN__)
 	/* Endianness change required only in Little-Endian */
@@ -312,7 +313,7 @@ uint8_t* sha1(const uint8_t* str, const uint64_t len) {
 	H[4] = H4;
 	#endif
 
-	return ret;
+	/* 0.2.0+ directly write to received ret. old code: return ret; */
 }
 
 /* SHA1 calculation in parts START */
