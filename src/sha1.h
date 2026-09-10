@@ -3,8 +3,8 @@
 | hon libSHA1      |
 +==================+
 | Coded by: hon    |
-| Version: 0.1.0   |
-| Date: 2025-12-19 |
+| Version: 0.2.0   |
+| Date: 2026-09-10 |
 +------------------+
 */
 /*
@@ -34,7 +34,7 @@ typedef struct {
 
 #define SHA1_DIGEST_LENGTH 20
 
-void SHA1(const uint8_t* str, const uint64_t len, uint8_t hash[SHA1_DIGEST_LENGTH]);
+void SHA1(const uint8_t* str, const uint64_t len, uint8_t ret[20]);
 
 void SHA1_Init(SHA1_CTX* context);
 void SHA1_Update(SHA1_CTX* context, const uint8_t* data, const uint64_t ilen);
