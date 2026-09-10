@@ -5,9 +5,10 @@
 int main() {
 	/* Input string to hash */
 	const unsigned char* input = (unsigned char*)"test";
+	unsigned char hash[20];
 
 	/* Calculate SHA-1 hash */
-	unsigned char* hash = sha1(input, strlen((char*)input));
+	SHA1(input, strlen((char*)input), hash);
 
 	/* Print the SHA-1 hash in hexadecimal format */
 	int i;
