@@ -21,7 +21,8 @@ At the beginning of the file:
 Then:
 ```c
 unsigned char* text_str = "this text will be hashed";
-unsigned char* sha1_hash = sha1(text_str, strlen(text_str));
+unsigned char sha1_hash[20];
+SHA1(text_str, strlen(text_str), sha1_hash);
 ```
 For complete examples, see [examples directory](examples).
 
