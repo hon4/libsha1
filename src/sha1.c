@@ -375,7 +375,8 @@ void SHA1_Process_Block(SHA1_CTX* context) {
 	context->H[4] = sha1_add(context->H[4], E);
 }
 
-void SHA1_Update(SHA1_CTX* context, const uint8_t* data, const uint64_t len) {
+void SHA1_Update(SHA1_CTX* context, const uint8_t* data, const uint64_t ilen) {
+	uint64_t len = ilen; /* Need non constant len variable - will changed to be able to work with const */
 	uint8_t unhashed = context->total_len % 64; /* 64 = block size in bytes */
 
 	/* len as remain_len */
