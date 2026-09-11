@@ -1,4 +1,4 @@
-AC_INIT([libsha1], [0.2.0], [greek.team.blog2@gmail.com])
+AC_INIT([libsha1], [0.2.1], [greek.team.blog2@gmail.com])
 AM_INIT_AUTOMAKE
 LT_INIT
 AC_PROG_CC
