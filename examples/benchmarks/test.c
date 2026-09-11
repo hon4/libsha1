@@ -19,12 +19,12 @@ void benchmark_sha1(const uint8_t* data, uint64_t len) {
     uint8_t digest[20];
 
     // Warm-up (optional)
-    sha1(data, len);
+    SHA1(data, len, digest);
 
     // Start timing
     clock_gettime(CLOCK_MONOTONIC, &start);
     for (int i = 0; i < NUM_ITERATIONS; i++) {
-        sha1(data, len);
+        SHA1(data, len, digest);
     }
     clock_gettime(CLOCK_MONOTONIC, &end);
 
