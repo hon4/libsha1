@@ -48,9 +48,6 @@
 /* ==== NOT CHANGEABLE MACROS END ==== */
 
 
-/*TEMP*/
-#define SHA1_DIGEST_LENGTH 20
-
 #include "sha1.h"
 #include <stdint.h>
 #include <string.h>
