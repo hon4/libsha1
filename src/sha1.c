@@ -251,7 +251,7 @@ void SHA1(const uint8_t* str, const uint64_t len, uint8_t ret[20]) {
 	/* Process all blocks */
 	uint64_t xblock;
 	for (xblock = 0; xblock < block_count; xblock++) {
-		memset(W, 0x00, 80 * sizeof(uint32_t)); /* Clear the W */
+		/*memset(W, 0x00, 80 * sizeof(uint32_t)); *//* Clear the W */
 		/* Method 1 Step A */
 		/* Move the M[xblock] at the beggining of the W */
 		int __libsha1_tmp_i2;
