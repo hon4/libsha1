@@ -4,12 +4,12 @@
 +==================+
 | Coded by: hon    |
 | Version: 0.2.1   |
-| Date: 2026-09-11 |
+| Date: 2026-09-19 |
 +------------------+
 */
 /*
  * This file (sha1.h) is part of hon's libSHA1
- * Copyright (C) 2025 hon
+ * Copyright (C) 2025-2026 hon
  *
  * This program is free and open source software.
  * License: GPL-2.0
