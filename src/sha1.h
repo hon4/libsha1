@@ -26,9 +26,9 @@ extern "C" {
 #include <stdint.h>
 
 typedef struct {
-	uint32_t H[5];		// hash value
-	uint64_t total_len;	// Total SHA1 Size
-	uint8_t buffer[64];	// a single 512 bit block buffer
+	uint32_t H[5];		/* hash value */
+	uint64_t total_len;	/* Total SHA1 Size */
+	uint8_t buffer[64];	/* a single 512 bit block buffer */
 } SHA1_CTX;
 
 #define SHA1_DIGEST_LENGTH 20
