@@ -2,9 +2,8 @@
 An open source, indepedent and easy to use SHA1 library for C/C++.
 
 ## Satus
-v0.0.1 - First Tested Version
-
-***WARNING:*** This lib is currently BETA. Some functions may not work correctly and some function structures may change in future versions.
+v0.2.1 - Latest fully tested version.
+Tested on `amd64 (GCC 14.2.0)` and `aarch64 Android 9 Termux (clang 21.1.8)`
 
 ## Requirements
 - STD: C89 or newer
