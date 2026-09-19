@@ -14,7 +14,6 @@
  * This program is free and open source software.
  * License: GPL-2.0
 */
-// Thanks to mmxsrup (https://github.com/mmxsrup) for SHA1 Calculation in parts. Used ideas from https://github.com/mmxsrup/libsha1
 
 #ifndef LIBSHA1_SHA1_H
 #define LIBSHA1_SHA1_H
